@@ -1,0 +1,13 @@
+Port 21 - FTP
+
+nmap -v -p 21 --script=ftp-anon.nse 10.11.1.0-255
+
+ls -l /usr/share/nmap/scripts/ftp*
+
+nmap -v -p 21 --script=ftp-anon.nse,ftp-bounce.nse,ftp-libopie.nse,ftp-proftpd-backdoor.nse,ftp-vsftpd-backdoor.nse,ftp-vuln-cve2010-4221.nse --script-args=unsafe=1 10.11.1.
+
+nmap --script=ftp-anon,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-backdoor,ftp-vuln-cve2010-4221,tftp-enum -p 21 INSERTIPADDRESS
+
+If you upload a binary file you have to put the ftp-server in binary mode, otherwise the file will become corrupted and you will not be able to use it! 
+The same for text-files. Use ascii mode for them! You just write binary and ascii to switch mode.
+
