@@ -1,0 +1,8 @@
+nmap -p 53 --script=dns-blacklist.nse,dns-cache-snoop.nse,dns-check-zone.nse,dns-client-subnet-scan.nse,dns-fuzz.nse,dns-nsec3-enum.nse,dns-nsec-enum.nse,dns-nsid.nse,dns-random-srcport.nse,dns-random-txid.nse,dns-recursion.nse,dns-service-discovery.nse,dns-srv-enum.nse,dns-update.nse,dns-zone-transfer.nse --script-args=unsafe=1 10.11.1.220
+
+nslookup 
+dig
+
+searchsploit
+
+ls -l /usr/share/nmap/scripts/dns*
