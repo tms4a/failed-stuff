@@ -1,0 +1,12 @@
+Port 22 - SSH
+Takes-password:
+
+If you have usernames test login with username:username
+
+ls -l /usr/share/nmap/scripts/ssh*
+
+nmap -v -p 22 --script=ssh2-enum-algos.nse,ssh-hostkey.nse,sshv1.nse --script-args=unsafe=1 10.11.1.
+
+ssh (name)@10.11.1.
+
+Hydra enum host and create list with crunch and cewl
