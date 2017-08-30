@@ -1,0 +1,73 @@
+Box I.P.:
+
+Box Name:
+
+Box Work-group:
+
+OS version:
+
+Nmap Scan:
+
+Full Nmap for each Port:
+
+Easy Wins you tried?
+
+Wireshark: is it talking? Is anyone talking to it?
+
+Misc services report: (enum4linux, Nikto, onesixtyone, snmpwalk, Dirbuster, and others):
+
+Are there msf modules for anything you've found?
+
+Are there log in options for ports besides http/s?
+
+Can you log in using anonymous to any ports?
+
+Can you read files from those ports?
+
+Can you PUT or POST files to those ports?
+
+What users have you found on this box?
+
+Port 80/443:
+
+Type of code used:
+
+Is the PHP before 5.3?
+
+Is there SQL running?
+
+Burpsuite report:
+
+SQL injection?
+
+What URL's are there?
+
+Can you access logs?
+
+Weak login? Bypass?
+
+Log in with stolen creds?
+
+WebDav?
+
+LFI/RFI?
+
+cookies?
+
+Create wordlists for possible brute force:
+
+Vulnerability Scan:
+
+Does it have RPC? Can it be exploited?
+
+Have you tried credentials you took from other boxes?
+
+Brute-Force or PTH:
+
+Searchsploit:
+
+Google-fu:
+
+Additional Info:
+
+Possible Angles for attack: 
