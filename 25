@@ -1,0 +1,20 @@
+nmap -v -p 25 --script=smtp-commands.nse,smtp-enum-users.nse,smtp-open-relay.nse,smtp-strangeport.nse,smtp-vuln-cve2010-4344.nse,smtp-vuln-cve2011-1720.nse,smtp-vuln-cve2011-1764.nse --script-args=unsafe=1 10.11.1.
+
+ls -l /usr/share/nmap/scripts/smtp*
+
+VRFY (some users you've enumerated from other boxes)
+EXPN (works like vrfy, try both)
+
+Hydra enum host and create list with crunch and cewl
+
+searchsploit
+
+nc -nvv INSERTIPADDRESS 25
+HELO foo<cr><lf>
+
+telnet INSERTIPADDRESS 25
+VRFY root
+
+nmap -script smtp-commands.nse 192.168.1.101
+
+smtp-user-enum -M VRFY -U /root/sectools/SecLists/Usernames/Names/names.txt -t 192.168.1.103
