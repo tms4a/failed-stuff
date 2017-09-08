@@ -1,0 +1,9 @@
+nmap -v -sV -sC -Pn -p3306 --script=mysql-vuln-cve2012-2122,mysql-query,mysql-enum 10.11.1.
+
+
+If you think you have creds:
+
+nmap -p3306 --script=mysql-dump-hashes --script-args='username=root,password=root' 10.11.1.
+
+
+nmap -sV -Pn -p3306 --script=mysql-variables,mysql-users,mysql-empty-password,mysql-databases,mysql-brute 10.11.1.
