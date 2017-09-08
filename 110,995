@@ -1,0 +1,13 @@
+nmap -p110,995 --script pop3-capabilities 10.11.1.
+
+nmap -p110,995 --script pop3-brute 10.11.1.
+this one takes a while
+
+
+
+
+
+
+
+
+
