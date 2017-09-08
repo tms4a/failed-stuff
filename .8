@@ -1,0 +1,331 @@
+Box I.P.: 10.11.1.8
+
+Box Name: Phoenix      
+
+Box Work-group: MYGROUP
+
+OS version: Cent OS
+
+Nmap Scan:  
+
+21/tcp   open   ftp         vsftpd 2.0.1
+22/tcp   open   ssh         OpenSSH 3.9p1 (protocol 1.99)
+80/tcp   open   http        Apache httpd 2.0.52 ((CentOS))
+111/tcp  open   rpcbind     2 (RPC #100000)
+139/tcp  open   netbios-ssn Samba smbd 3.X (workgroup: MYGROUP)
+443/tcp  open   ssl/http    Apache httpd 2.0.52 ((CentOS))
+445/tcp  open   netbios-ssn Samba smbd 3.X (workgroup: MYGROUP)
+631/tcp  open   ipp         CUPS 1.1
+3306/tcp open   mysql?
+MAC Address: 00:50:56:89:0E:EC (VMware)
+Service Info: OS: Unix
+
+PORT     STATE  SERVICE
+21/tcp   open   ftp
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_Can't get directory listing: ERROR
+
+
+22/tcp   open   ssh
+|_ssh-hostkey: ERROR: Script execution failed (use -d to debug)
+|_sshv1: Server supports SSHv1
+
+
+80/tcp   open   http
+| http-methods: GET HEAD POST OPTIONS TRACE
+| Potentially risky methods: TRACE
+|_See http://nmap.org/nsedoc/scripts/http-methods.html
+| http-robots.txt: 2 disallowed entries
+|_/internal/  /tmp/
+|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
+
+
+111/tcp  open   rpcbind
+| rpcinfo:
+|   program version   port/proto  service
+|   100000  2            111/tcp  rpcbind
+|   100000  2            111/udp  rpcbind
+|   100024  1            844/udp  status
+|_  100024  1            847/tcp  status
+
+
+139/tcp  open   netbios-ssn
+
+
+443/tcp  open   https
+| http-methods: GET HEAD POST OPTIONS TRACE
+| Potentially risky methods: TRACE
+|_See http://nmap.org/nsedoc/scripts/http-methods.html
+| http-robots.txt: 2 disallowed entries
+|_/internal/  /tmp/
+|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
+
+
+445/tcp  open   microsoft-ds
+
+
+631/tcp  open   ipp
+| http-methods: GET HEAD OPTIONS POST PUT
+| Potentially risky methods: PUT
+|_See http://nmap.org/nsedoc/scripts/http-methods.html
+|_http-title: 403 Forbidden
+
+
+3306/tcp open   mysql
+|_mysql-info: ERROR: Script execution failed (use -d to debug)
+MAC Address: 00:50:56:89:0E:EC (VMware)
+
+Host script results:
+| smb-os-discovery:
+|   OS: Unix (Samba 3.0.33-0.17.el4)
+|   Computer name: phoenix
+|   NetBIOS computer name:
+|   Domain name:
+|   FQDN: phoenix
+|_  System time: 2017-08-29T21:36:22-04:00
+| smb-security-mode:
+|   Account that was used for smb scripts: guest
+|   User-level authentication
+|   SMB Security: Challenge/response passwords supported
+|_  Message signing disabled (dangerous, but default)
+|_smbv2-enabled: Server doesn't support SMBv2 protocol
+
+
+
+Full Nmap for each Port:      
+
+Port 21:  ftp-anon: Anonymous FTP login allowed (FTP code 230)
+
+Port 22: sshv1: Server supports SSHv1
+
+Port 80/443:  http-robots.txt: 2 disallowed entries
+                                                /internal/  /tmp/
+http-vuln-cve2011-3192:
+|   VULNERABLE:
+|   Apache byterange filter DoS
+
+Port 139,445: nothing good
+
+Port 631: nothing good
+
+Port 3306: nothing good
+
+
+
+Easy Wins you tried?   
+
+hydra -L /usr/share/wordlists/names.txt -P /usr/share/wordlists/rocked.txt 10.11.1.8 ssh (get better user list and better password list, maybe full rockyou.txt)
+
+Wireshark: is it talking? Is anyone talking to it?   
+
+Broadcasts as a print server. Xenix
+
+10.11.1.22 arp'ed for it.
+
+Misc services report: (enum4linux, Nikto, onesixtyone, snmpwalk, Dirbuster, and others): 
+
+enum4linux:
+ ==========================
+|    Target Information    |
+ ==========================
+Target ........... 10.11.1.8
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
+
+
+ =================================================
+|    Enumerating Workgroup/Domain on 10.11.1.8    |
+ =================================================
+[E] Can't find workgroup/domain
+
+
+ =========================================
+|    Nbtstat Information for 10.11.1.8    |
+ =========================================
+Looking up status of 10.11.1.8
+No reply from 10.11.1.8
+
+ ==================================
+|    Session Check on 10.11.1.8    |
+ ==================================
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 437.
+[+] Server 10.11.1.8 allows sessions using username '', password ''
+[+] Got domain/workgroup name: MYGROUP
+
+ ========================================
+|    Getting domain SID for 10.11.1.8    |
+ ========================================
+Domain Name: MYGROUP
+Domain Sid: (NULL SID)
+[+] Can't determine if host is part of domain or part of a workgroup
+
+ ===================================
+|    OS information on 10.11.1.8    |
+ ===================================
+[+] Got OS info for 10.11.1.8 from smbclient: Domain=[MYGROUP] OS=[Unix] Server=[Samba 3.0.33-0.17.el4]
+[+] Got OS info for 10.11.1.8 from srvinfo:
+PHOENIX        Wk Sv PrQ Unx NT SNT Samba Server Version 3.0.33-0.17.el4
+platform_id     : 500
+os version      : 4.9
+server type     : 0x809a03
+
+ ==========================
+|    Users on 10.11.1.8    |
+ ==========================
+Use of uninitialized value $users in print at ./enum4linux.pl line 874.
+Use of uninitialized value $users in pattern match (m//) at ./enum4linux.pl line 877.
+
+Use of uninitialized value $users in print at ./enum4linux.pl line 888.
+Use of uninitialized value $users in pattern match (m//) at ./enum4linux.pl line 890.
+
+ ======================================
+|    Share Enumeration on 10.11.1.8    |
+ ======================================
+Domain=[MYGROUP] OS=[Unix] Server=[Samba 3.0.33-0.17.el4]
+Domain=[MYGROUP] OS=[Unix] Server=[Samba 3.0.33-0.17.el4]
+
+Sharename       Type      Comment
+---------       ----      -------
+IPC$            IPC       IPC Service (Samba Server Version 3.0.33-0.17.el4)
+
+Server               Comment
+---------            -------
+PHOENIX              Samba Server Version 3.0.33-0.17.el4
+
+Workgroup            Master
+---------            -------
+MYGROUP              PHOENIX
+
+[+] Attempting to map shares on 10.11.1.8
+//10.11.1.8/IPC$ [E] Can't understand response:
+Domain=[MYGROUP] OS=[Unix] Server=[Samba 3.0.33-0.17.el4]
+NT_STATUS_NETWORK_ACCESS_DENIED listing \*
+
+ =================================================
+|    Password Policy Information for 10.11.1.8    |
+ =================================================
+
+[+] Attaching to 10.11.1.8 using a NULL share
+
+[+] Trying protocol 445/SMB...
+
+[+] Found domain(s):
+
+[+] PHOENIX
+[+] Builtin
+
+[+] Password Info for Domain: PHOENIX
+
+[+] Minimum password length: 5
+[+] Password history length: None
+[+] Maximum password age: Not Set
+[+] Password Complexity Flags: 000000
+
+[+] Domain Refuse Password Change: 0
+[+] Domain Password Store Cleartext: 0
+[+] Domain Password Lockout Admins: 0
+[+] Domain Password No Clear Change: 0
+[+] Domain Password No Anon Change: 0
+[+] Domain Password Complex: 0
+
+[+] Minimum password age: None
+[+] Reset Account Lockout Counter: 30 minutes
+[+] Locked Account Duration: 30 minutes
+[+] Account Lockout Threshold: None
+[+] Forced Log off Time: Not Set
+
+[+] Retieved partial password policy with rpcclient:
+
+Password Complexity: Disabled
+Minimum Password Length: 0
+     
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          10.11.1.8
++ Target Hostname:    10.11.1.8
++ Target Port:        80
++ Start Time:         2017-08-30 06:24:25 (GMT-4)
+---------------------------------------------------------------------------
++ Server: Apache/2.0.52 (CentOS)
++ Server leaks inodes via ETags, header found with file /, inode: 20176, size: 218, mtime: Sun Jun  3 12:23:28 1979
++ The anti-clickjacking X-Frame-Options header is not present.
++ Retrieved x-powered-by header: PHP/4.3.9
++ File/dir '/internal/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ "robots.txt" contains 2 entries which should be manually viewed.
++ Apache/2.0.52 appears to be outdated (current is at least Apache/2.4.7). Apache 2.0.65 (final release) and 2.2.26 are also current.
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS, TRACE
++ OSVDB-877: HTTP TRACE method is active, suggesting the host is vulnerable to XST
++ OSVDB-3092: /internal/: This might be interesting...
++ Uncommon header 'tcn' found, with contents: choice
++ OSVDB-3092: /manual/: Web server manual found.
++ OSVDB-3268: /icons/: Directory indexing found.
++ OSVDB-3268: /manual/images/: Directory indexing found.
++ OSVDB-3233: /icons/README: Apache default file found.
++ 7358 requests: 1 error(s) and 14 item(s) reported on remote host
++ End Time:           2017-08-30 08:04:04 (GMT-4) (5979 seconds)
+---------------------------------------------------------------------------
+
+
+
+Are there msf modules for anything you've found?      
+
+Are there log in options for ports besides http/s?      
+
+Can you log in using anonymous to any ports?      
+
+Can you read files from those ports?      
+
+Can you PUT or POST files to those ports?      
+
+What users have you found on this box?      
+
+Port 80/443:      
+
+Type of code used:      
+
+Is the PHP before 5.3?      
+
+Is there SQL running?      
+
+Burpsuite report:      
+
+SQL injection?      
+
+What URL's are there?      
+
+Can you access logs?      
+
+Weak login? Bypass?      
+
+Log in with stolen creds?      
+
+WebDav?      
+
+LFI/RFI?      
+
+Cookies?      
+
+Create wordlists for possible brute force:      
+
+Vulnerability Scan:      
+
+Does it have RPC? Can it be exploited?      
+
+Have you tried credentials you took from other boxes?      
+
+Brute-Force or PTH:      
+
+Searchsploit:      
+
+Google-fu:      
+
+Additional Info:   
+It has no attached printers which denies some exploits.  
+User named Justine was found
+
+Possible Angles for attack:
+the CUPS port has several priv esc. opportunities.
+
+Xenix server.
