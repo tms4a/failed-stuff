@@ -1,0 +1,5 @@
+nmap -v -p 139,445 --script=smb-check-vulns,smb-vuln-ms10-054.nse,smb-vuln-ms10-061.nse --script-args=unsafe=1 10.11.1.
+
+enum4linux -a 10.11.1.
+
+ls -l /usr/share/nmap/scripts/smb*
